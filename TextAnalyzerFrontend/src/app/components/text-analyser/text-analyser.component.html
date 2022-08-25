@@ -1,0 +1,30 @@
+<div class="d-flex flex-column align-items-center mt-5">
+  <h3>Text Analyser</h3>
+  <div class="d-flex flex-row w-75 justify-content-center mt-3 mx-5 h-100">
+    <div class="d-flex flex-column align-items-center mx-3 w-25">
+      <select class="w-100 mb-3 bg-light text-lg-center p-2 rounded" [(ngModel)]="textAnalyserType">
+      <option value="VOWELS">Vowels</option>
+      <option value="CONSONANTS">Consonants</option>
+      </select>
+      <button class="btn w-100 btn-outline-secondary my-2" (click)="clearText()">Clear</button>
+      <button class="btn btn-primary w-100" (click)="analyseText()"> Analyse </button>
+      <button class="btn btn-sm mt-4" [ngClass]="{'btn-danger': !isOnline, 'btn-success': isOnline}"
+              (click)="toggleConnectivity()">{{isOnline ? 'Online' : 'Offline'}}</button>
+    </div>
+    <div class="d-flex flex-column flex-grow-1">
+      <textarea [(ngModel)]="userInputText" rows="5" class="mb-3 p-4">
+      </textarea>
+      <div class="bg-opacity-50 bg-light border-secondary rounded p-4 flex-grow-1 overflow-y-scroll">
+        <div *ngFor=" let analysis of userOutput, let index">
+          <div class="font-monospace">
+            <div *ngFor="let finding of analysis" class="mb-1">
+              {{finding}} <br>
+            </div>
+          </div>
+          <div *ngIf="analysis.length > 0" class="w-100 border-top border-secondary mt-2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
